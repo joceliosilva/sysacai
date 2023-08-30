@@ -69,7 +69,9 @@ public class TelaInicial extends javax.swing.JFrame {
 
         jPanel1.setBackground(new java.awt.Color(153, 51, 255));
 
-        jLabel1.setFont(new java.awt.Font("Sylfaen", 0, 18)); // NOI18N
+        jLabel1.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("SYS AÇAÍ");
         jLabel1.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
 
@@ -80,14 +82,11 @@ public class TelaInicial extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(571, 571, 571))
+                .addGap(556, 556, 556))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(24, 24, 24)
-                .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 44, Short.MAX_VALUE)
-                .addContainerGap())
+            .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 58, Short.MAX_VALUE)
         );
 
         jPanel2.setBackground(new java.awt.Color(153, 51, 255));
@@ -145,7 +144,7 @@ public class TelaInicial extends javax.swing.JFrame {
                 .addComponent(btnConsulta1, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(47, 47, 47)
                 .addComponent(btnEstoque, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(236, Short.MAX_VALUE))
+                .addContainerGap(252, Short.MAX_VALUE))
         );
 
         jPanel4.setBackground(new java.awt.Color(153, 51, 255));
@@ -158,7 +157,7 @@ public class TelaInicial extends javax.swing.JFrame {
             }
         });
 
-        btnConsulta5.setText("---");
+        btnConsulta5.setText("ESTOQUE");
         btnConsulta5.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnConsulta5ActionPerformed(evt);
@@ -172,7 +171,7 @@ public class TelaInicial extends javax.swing.JFrame {
             }
         });
 
-        btnConsulta8.setText("ESTOQUE");
+        btnConsulta8.setText("PRODUTOS");
         btnConsulta8.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnConsulta8ActionPerformed(evt);
@@ -263,7 +262,7 @@ public class TelaInicial extends javax.swing.JFrame {
                 .addComponent(btnConsulta9, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(51, 51, 51)
                 .addComponent(btnConsulta7, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(231, Short.MAX_VALUE))
+                .addContainerGap(247, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -302,10 +301,10 @@ public class TelaInicial extends javax.swing.JFrame {
     }//GEN-LAST:event_btnConsultaActionPerformed
 
     private void btnVendaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVendaActionPerformed
-               // TelaCadProd telaCadProd = new TelaCadProd();
-                 // telaCadProd.setLocationRelativeTo(null); // Centralize a tela
-                 // telaCadProd.setVisible(true);
-                //  dispose();
+               TelaCadProd telaCadProd = new TelaCadProd();
+               telaCadProd.setLocationRelativeTo(null); // Centralize a tela
+               telaCadProd.setVisible(true);
+               dispose();
     }//GEN-LAST:event_btnVendaActionPerformed
 
     private void btnConsulta1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConsulta1ActionPerformed
@@ -347,7 +346,9 @@ public class TelaInicial extends javax.swing.JFrame {
     }//GEN-LAST:event_btnConsulta7ActionPerformed
 
     private void btnConsulta8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConsulta8ActionPerformed
-        // TODO add your handling code here:
+            TelaListaProd telaInicial = new TelaListaProd();
+            telaInicial.setLocationRelativeTo(null); // Centralize a tela
+            telaInicial.setVisible(true);
     }//GEN-LAST:event_btnConsulta8ActionPerformed
 
     private void btnConsulta9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConsulta9ActionPerformed

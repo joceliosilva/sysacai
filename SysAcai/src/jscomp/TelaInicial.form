@@ -71,17 +71,13 @@
               <Group type="102" alignment="1" attributes="0">
                   <EmptySpace max="32767" attributes="0"/>
                   <Component id="jLabel1" min="-2" pref="112" max="-2" attributes="0"/>
-                  <EmptySpace min="-2" pref="571" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="556" max="-2" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
         <DimensionLayout dim="1">
           <Group type="103" groupAlignment="0" attributes="0">
-              <Group type="102" attributes="0">
-                  <EmptySpace min="-2" pref="24" max="-2" attributes="0"/>
-                  <Component id="jLabel1" pref="44" max="32767" attributes="0"/>
-                  <EmptySpace max="-2" attributes="0"/>
-              </Group>
+              <Component id="jLabel1" alignment="1" pref="58" max="32767" attributes="0"/>
           </Group>
         </DimensionLayout>
       </Layout>
@@ -89,8 +85,12 @@
         <Component class="javax.swing.JLabel" name="jLabel1">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-              <Font name="Sylfaen" size="18" style="0"/>
+              <Font name="Arial" size="18" style="1"/>
             </Property>
+            <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="ff" green="ff" red="ff" type="rgb"/>
+            </Property>
+            <Property name="horizontalAlignment" type="int" value="0"/>
             <Property name="text" type="java.lang.String" value="SYS A&#xc7;A&#xcd;"/>
             <Property name="horizontalTextPosition" type="int" value="0"/>
           </Properties>
@@ -135,7 +135,7 @@
                   <Component id="btnConsulta1" min="-2" pref="60" max="-2" attributes="0"/>
                   <EmptySpace min="-2" pref="47" max="-2" attributes="0"/>
                   <Component id="btnEstoque" min="-2" pref="60" max="-2" attributes="0"/>
-                  <EmptySpace pref="236" max="32767" attributes="0"/>
+                  <EmptySpace pref="252" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -244,7 +244,7 @@
         </Component>
         <Component class="javax.swing.JButton" name="btnConsulta5">
           <Properties>
-            <Property name="text" type="java.lang.String" value="---"/>
+            <Property name="text" type="java.lang.String" value="ESTOQUE"/>
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnConsulta5ActionPerformed"/>
@@ -266,7 +266,7 @@
         </Component>
         <Component class="javax.swing.JButton" name="btnConsulta8">
           <Properties>
-            <Property name="text" type="java.lang.String" value="ESTOQUE"/>
+            <Property name="text" type="java.lang.String" value="PRODUTOS"/>
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnConsulta8ActionPerformed"/>
@@ -318,7 +318,7 @@
                   <Component id="btnConsulta9" min="-2" pref="60" max="-2" attributes="0"/>
                   <EmptySpace min="-2" pref="51" max="-2" attributes="0"/>
                   <Component id="btnConsulta7" min="-2" pref="60" max="-2" attributes="0"/>
-                  <EmptySpace pref="231" max="32767" attributes="0"/>
+                  <EmptySpace pref="247" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>

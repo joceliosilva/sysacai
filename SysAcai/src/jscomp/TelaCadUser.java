@@ -4,7 +4,6 @@
  */
 package jscomp;
 
-import com.mysql.cj.xdevapi.Statement;
 import java.awt.Color;
 import java.io.File;
 import java.net.URL;
@@ -18,24 +17,17 @@ import java.util.List;
 import java.util.prefs.Preferences;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
-import javax.swing.JScrollPane;
-import javax.swing.JTable;
-import javax.swing.table.DefaultTableModel;
 
 
-public class TelaListaProd extends javax.swing.JFrame {
-    
-    public TelaListaProd() {
+public class TelaCadUser extends javax.swing.JFrame {
+   
+    public TelaCadUser() {
        
         initComponents();
-        TelaListaProd telalista = this;
-        telalista.setLocationRelativeTo(null);
-        telalista.setExtendedState(JFrame.MAXIMIZED_BOTH);
-        telalista.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-       
-
-        carregarProdutos();
-       
+         TelaCadUser telaVendaPdv = this;
+        telaVendaPdv.setLocationRelativeTo(null);
+        telaVendaPdv.setExtendedState(JFrame.MAXIMIZED_BOTH);
+        telaVendaPdv.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     }
     
       Preferences prefs = Preferences.userNodeForPackage(ConfiguracaoBancoDados.class);
@@ -45,42 +37,37 @@ public class TelaListaProd extends javax.swing.JFrame {
         String nomebd = prefs.get("nomeBanco","" );
         String usuario = prefs.get("usuario", "");
         String senha = prefs.get("senha", "");
-        
+        private File arquivoSelecionado; 
     
-        
-        private void carregarProdutos() {
+     private void cadastrarProduto() {
         try {
+            String nome = txtNome.getText();
+            String senha1 = txtSenha.getText();
+
             // Estabeleça a conexão com o banco de dados (substitua com suas próprias configurações)
-            Connection conexao = DriverManager.getConnection(urlBanco, usuario, senha);
+            Connection conn = DriverManager.getConnection(urlBanco, usuario, senha);
 
-            // Crie uma declaração SQL para selecionar todos os produtos da tabela "PRODUTO"
-            java.sql.Statement stmt = conexao.createStatement();
-            String sql = "SELECT id, nome, preco FROM produto";
-            ResultSet rs = stmt.executeQuery(sql);
+            // Crie uma consulta preparada para inserir os dados na tabela "PRODUTO"
+            String sql = "INSERT INTO usuario (nome, senha) VALUES (?, ?)";
+            PreparedStatement pstmt = conn.prepareStatement(sql);
+            pstmt.setString(1, nome);
+            pstmt.setString(2, senha1);
 
-            // Remova todas as linhas existentes da tabela
-            DefaultTableModel modelo = new DefaultTableModel();
-            modelo.addColumn("Código");
-            modelo.addColumn("Nome");
-            modelo.addColumn("Preço");
-            modelo.setRowCount(0);
-            tabelaProdutos.setModel(modelo);
+            // Execute a consulta preparada
+            pstmt.executeUpdate();
 
-            // Preencha o modelo com os dados do banco de dados
-            while (rs.next()) {
-                int id = rs.getInt("id");
-                String nome = rs.getString("nome");
-                double preco = rs.getDouble("preco");
-                modelo.addRow(new Object[]{id,nome,"R$ " + preco});
-            }
-
-            // Feche a conexão
-            conexao.close();
+            // Feche a conexão e limpe os campos de texto
+            conn.close();
+            txtNome.setText("");
+            txtSenha.setText("");
+            JOptionPane.showMessageDialog(this, "Usuário cadastrado com sucesso!");
         } catch (SQLException ex) {
             ex.printStackTrace();
-            JOptionPane.showMessageDialog(this, "Erro ao carregar produtos: " + ex.getMessage());
+            JOptionPane.showMessageDialog(this, "Erro ao cadastrar o usuário: " + ex.getMessage());
         }
     }
+
+
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -89,11 +76,13 @@ public class TelaListaProd extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         bntVoltar = new javax.swing.JButton();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        tabelaProdutos = new javax.swing.JTable();
+        jPanel4 = new javax.swing.JPanel();
+        btnCadProd = new javax.swing.JButton();
+        txtNome = new javax.swing.JTextField();
+        txtSenha = new javax.swing.JPasswordField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setTitle("PRODUTOS - SYSAÇAÍ");
+        setTitle("ADD USUÁRIO - SYSAÇAÍ");
         setBackground(new java.awt.Color(255, 255, 255));
 
         jPanel1.setBackground(new java.awt.Color(153, 51, 255));
@@ -117,7 +106,7 @@ public class TelaListaProd extends javax.swing.JFrame {
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addGap(27, 27, 27)
+                .addGap(57, 57, 57)
                 .addComponent(bntVoltar, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -130,49 +119,82 @@ public class TelaListaProd extends javax.swing.JFrame {
                 .addComponent(bntVoltar))
         );
 
-        tabelaProdutos.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
-            },
-            new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+        jPanel4.setBackground(new java.awt.Color(153, 51, 255));
+        jPanel4.setBorder(javax.swing.BorderFactory.createTitledBorder("CADASTRAR USUÁRIO"));
+
+        btnCadProd.setText("CADASTRAR");
+        btnCadProd.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCadProdActionPerformed(evt);
             }
-        ));
-        tabelaProdutos.setToolTipText("");
-        tabelaProdutos.setEnabled(false);
-        jScrollPane1.setViewportView(tabelaProdutos);
+        });
+
+        txtNome.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        txtNome.setBorder(javax.swing.BorderFactory.createTitledBorder("NOME"));
+
+        txtSenha.setBorder(javax.swing.BorderFactory.createTitledBorder("SENHA"));
+
+        javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
+        jPanel4.setLayout(jPanel4Layout);
+        jPanel4Layout.setHorizontalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel4Layout.createSequentialGroup()
+                .addGap(67, 67, 67)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(txtNome, javax.swing.GroupLayout.DEFAULT_SIZE, 261, Short.MAX_VALUE)
+                    .addComponent(txtSenha))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
+                .addContainerGap(89, Short.MAX_VALUE)
+                .addComponent(btnCadProd, javax.swing.GroupLayout.PREFERRED_SIZE, 217, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(74, 74, 74))
+        );
+        jPanel4Layout.setVerticalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel4Layout.createSequentialGroup()
+                .addGap(146, 146, 146)
+                .addComponent(txtNome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(29, 29, 29)
+                .addComponent(txtSenha, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(37, 37, 37)
+                .addComponent(btnCadProd, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(358, Short.MAX_VALUE))
+        );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(480, 480, 480)
+                .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(414, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(0, 301, Short.MAX_VALUE)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 744, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(239, 239, 239))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(45, 45, 45)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 500, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(195, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(8, 8, 8))
         );
+
+        jPanel4.getAccessibleContext().setAccessibleName("CADASTRAR USUÁRIO");
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void btnCadProdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCadProdActionPerformed
+        cadastrarProduto();
+    }//GEN-LAST:event_btnCadProdActionPerformed
+
     private void bntVoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bntVoltarActionPerformed
-        TelaInicial ini = new TelaInicial();
-        ini.setVisible(true);
-        dispose();
+      TelaInicial ini = new TelaInicial();
+      ini.setVisible(true);
+      dispose();
     }//GEN-LAST:event_bntVoltarActionPerformed
 
     /**
@@ -188,7 +210,7 @@ public class TelaListaProd extends javax.swing.JFrame {
         
          
          java.awt.EventQueue.invokeLater(() -> {
-            TelaListaProd telaInicial = new TelaListaProd();
+            TelaCadUser telaInicial = new TelaCadUser();
             telaInicial.setLocationRelativeTo(null); // Centralize a tela
             telaInicial.setVisible(true);
          });
@@ -198,9 +220,11 @@ public class TelaListaProd extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton bntVoltar;
+    public javax.swing.JButton btnCadProd;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JScrollPane jScrollPane1;
-    public javax.swing.JTable tabelaProdutos;
+    private javax.swing.JPanel jPanel4;
+    private javax.swing.JTextField txtNome;
+    private javax.swing.JPasswordField txtSenha;
     // End of variables declaration//GEN-END:variables
 }

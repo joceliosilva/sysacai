@@ -5,6 +5,8 @@
 package jscomp;
 
 import java.awt.Color;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.io.File;
 import java.net.URL;
 import java.sql.Connection;
@@ -19,12 +21,12 @@ import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
 
-public class TelaCadProd extends javax.swing.JFrame {
+public class TelaCadTigela extends javax.swing.JFrame {
    
-    public TelaCadProd() {
+    public TelaCadTigela() {
        
         initComponents();
-         TelaCadProd telaVendaPdv = this;
+         TelaCadTigela telaVendaPdv = this;
         telaVendaPdv.setLocationRelativeTo(null);
         telaVendaPdv.setExtendedState(JFrame.MAXIMIZED_BOTH);
         telaVendaPdv.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -37,35 +39,42 @@ public class TelaCadProd extends javax.swing.JFrame {
         String nomebd = prefs.get("nomeBanco","" );
         String usuario = prefs.get("usuario", "");
         String senha = prefs.get("senha", "");
-        private File arquivoSelecionado; 
-    
-     private void cadastrarProduto() {
+        
+        
+     
+    private void cadastrarTigela() {
         try {
-            String nome = txtNomeProd.getText();
-            double preco = Double.parseDouble(txtPrecoProd.getText());
-
             // Estabeleça a conexão com o banco de dados (substitua com suas próprias configurações)
             Connection conn = DriverManager.getConnection(urlBanco, usuario, senha);
 
-            // Crie uma consulta preparada para inserir os dados na tabela "PRODUTO"
-            String sql = "INSERT INTO PRODUTO (nome, preco) VALUES (?, ?)";
+            // Crie uma consulta SQL para inserir os dados da tigela na tabela do banco de dados
+            String sql = "INSERT INTO Tigela (nome, tara, unica) VALUES (?, ?, ?)";
             PreparedStatement pstmt = conn.prepareStatement(sql);
-            pstmt.setString(1, nome);
-            pstmt.setDouble(2, preco);
 
-            // Execute a consulta preparada
+            // Defina os parâmetros da consulta com base nos dados da interface gráfica
+            pstmt.setString(1, txtNomeTigela.getText());
+            pstmt.setDouble(2, Double.parseDouble(txtTaraTigela.getText()));
+            pstmt.setBoolean(3, chkUnica.isSelected());
+
+            // Execute a consulta
             pstmt.executeUpdate();
 
-            // Feche a conexão e limpe os campos de texto
+            // Feche a conexão
             conn.close();
-            txtNomeProd.setText("");
-            txtPrecoProd.setText("");
-            JOptionPane.showMessageDialog(this, "Produto cadastrado com sucesso!");
-        } catch (SQLException ex) {
+
+            JOptionPane.showMessageDialog(this, "Tigela cadastrada com sucesso!");
+             txtNomeTigela.setText("");
+           txtTaraTigela.setText("");
+           chkUnica.setSelected(false);
+        } catch (Exception ex) {
             ex.printStackTrace();
-            JOptionPane.showMessageDialog(this, "Erro ao cadastrar o produto: " + ex.getMessage());
+            JOptionPane.showMessageDialog(this, "Erro ao cadastrar tigela: " + ex.getMessage());
         }
+    
     }
+    
+    
+    
 
 
 
@@ -78,11 +87,13 @@ public class TelaCadProd extends javax.swing.JFrame {
         bntVoltar = new javax.swing.JButton();
         jPanel4 = new javax.swing.JPanel();
         btnCadProd = new javax.swing.JButton();
-        txtNomeProd = new javax.swing.JTextField();
-        txtPrecoProd = new javax.swing.JTextField();
+        txtNomeTigela = new javax.swing.JTextField();
+        txtTaraTigela = new javax.swing.JTextField();
+        chkUnica = new javax.swing.JCheckBox();
+        jLabel2 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setTitle("ADD PRODUTO - SYSAÇAÍ");
+        setTitle("ADD TIGELA - SYSAÇAÍ");
         setBackground(new java.awt.Color(255, 255, 255));
 
         jPanel1.setBackground(new java.awt.Color(153, 51, 255));
@@ -120,7 +131,7 @@ public class TelaCadProd extends javax.swing.JFrame {
         );
 
         jPanel4.setBackground(new java.awt.Color(153, 51, 255));
-        jPanel4.setBorder(javax.swing.BorderFactory.createTitledBorder("CADASTRAR PRODUTO"));
+        jPanel4.setBorder(javax.swing.BorderFactory.createTitledBorder("CADASTRAR TIGELA"));
 
         btnCadProd.setText("CADASTRAR");
         btnCadProd.addActionListener(new java.awt.event.ActionListener() {
@@ -129,12 +140,16 @@ public class TelaCadProd extends javax.swing.JFrame {
             }
         });
 
-        txtNomeProd.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        txtNomeProd.setBorder(javax.swing.BorderFactory.createTitledBorder("NOME"));
+        txtNomeTigela.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        txtNomeTigela.setBorder(javax.swing.BorderFactory.createTitledBorder("NOME"));
 
-        txtPrecoProd.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        txtPrecoProd.setToolTipText("Digite o preço...");
-        txtPrecoProd.setBorder(javax.swing.BorderFactory.createTitledBorder("PREÇO"));
+        txtTaraTigela.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        txtTaraTigela.setToolTipText("Digite o preço...");
+        txtTaraTigela.setBorder(javax.swing.BorderFactory.createTitledBorder("TARA"));
+
+        jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel2.setText("ÚNICA");
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
@@ -143,24 +158,35 @@ public class TelaCadProd extends javax.swing.JFrame {
             .addGroup(jPanel4Layout.createSequentialGroup()
                 .addGap(67, 67, 67)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(txtPrecoProd, javax.swing.GroupLayout.DEFAULT_SIZE, 261, Short.MAX_VALUE)
-                    .addComponent(txtNomeProd))
+                    .addComponent(txtTaraTigela, javax.swing.GroupLayout.DEFAULT_SIZE, 261, Short.MAX_VALUE)
+                    .addComponent(txtNomeTigela))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
                 .addContainerGap(91, Short.MAX_VALUE)
-                .addComponent(btnCadProd, javax.swing.GroupLayout.PREFERRED_SIZE, 217, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(72, 72, 72))
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
+                        .addComponent(btnCadProd, javax.swing.GroupLayout.PREFERRED_SIZE, 217, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(72, 72, 72))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
+                        .addComponent(jLabel2)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(chkUnica)
+                        .addGap(142, 142, 142))))
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel4Layout.createSequentialGroup()
-                .addGap(146, 146, 146)
-                .addComponent(txtNomeProd, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(95, 95, 95)
+                .addComponent(txtNomeTigela, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(40, 40, 40)
-                .addComponent(txtPrecoProd, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(txtTaraTigela, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(34, 34, 34)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabel2)
+                    .addComponent(chkUnica))
                 .addGap(61, 61, 61)
                 .addComponent(btnCadProd, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(324, Short.MAX_VALUE))
+                .addContainerGap(321, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -188,7 +214,7 @@ public class TelaCadProd extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnCadProdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCadProdActionPerformed
-        cadastrarProduto();
+        cadastrarTigela();
     }//GEN-LAST:event_btnCadProdActionPerformed
 
     private void bntVoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bntVoltarActionPerformed
@@ -210,7 +236,7 @@ public class TelaCadProd extends javax.swing.JFrame {
         
          
          java.awt.EventQueue.invokeLater(() -> {
-            TelaCadProd telaInicial = new TelaCadProd();
+            TelaCadTigela telaInicial = new TelaCadTigela();
             telaInicial.setLocationRelativeTo(null); // Centralize a tela
             telaInicial.setVisible(true);
          });
@@ -221,10 +247,12 @@ public class TelaCadProd extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton bntVoltar;
     public javax.swing.JButton btnCadProd;
+    private javax.swing.JCheckBox chkUnica;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel4;
-    private javax.swing.JTextField txtNomeProd;
-    private javax.swing.JTextField txtPrecoProd;
+    private javax.swing.JTextField txtNomeTigela;
+    private javax.swing.JTextField txtTaraTigela;
     // End of variables declaration//GEN-END:variables
 }

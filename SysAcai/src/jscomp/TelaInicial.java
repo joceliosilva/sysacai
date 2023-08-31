@@ -36,10 +36,7 @@ public class TelaInicial extends javax.swing.JFrame {
         String nomebd = prefs.get("nomeBanco","" );
         String usuario = prefs.get("usuario", "");
         String senha = prefs.get("senha", "");
-        private File arquivoSelecionado; 
-    
-    
-
+        
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -99,7 +96,7 @@ public class TelaInicial extends javax.swing.JFrame {
             }
         });
 
-        btnConsulta.setText("CADASTRAR POTE");
+        btnConsulta.setText("CADASTRAR TIGELA");
         btnConsulta.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnConsultaActionPerformed(evt);
@@ -113,7 +110,7 @@ public class TelaInicial extends javax.swing.JFrame {
             }
         });
 
-        btnEstoque.setText("EDITAR POTE");
+        btnEstoque.setText("EDITAR TIGELA");
         btnEstoque.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnEstoqueActionPerformed(evt);
@@ -297,7 +294,9 @@ public class TelaInicial extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnConsultaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConsultaActionPerformed
-       
+           TelaCadTigela tigela = new TelaCadTigela();
+           tigela.setVisible(true);
+           dispose();
     }//GEN-LAST:event_btnConsultaActionPerformed
 
     private void btnVendaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVendaActionPerformed
@@ -308,18 +307,24 @@ public class TelaInicial extends javax.swing.JFrame {
     }//GEN-LAST:event_btnVendaActionPerformed
 
     private void btnConsulta1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConsulta1ActionPerformed
-        // TODO add your handling code here:
+              TelaAlterProd telaCadProd = new TelaAlterProd();
+               telaCadProd.setLocationRelativeTo(null); // Centralize a tela
+               telaCadProd.setVisible(true);
+               dispose();
     }//GEN-LAST:event_btnConsulta1ActionPerformed
 
     private void btnConsulta3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConsulta3ActionPerformed
-        //   TelaCadUsuario telacaduser = new TelaCadUsuario();
-        //   telacaduser.setLocationRelativeTo(null); // Centralize a tela
-         //  telacaduser.setVisible(true);
-         //  dispose(); // Feche a tela de login
+          TelaCadUser telacaduser = new TelaCadUser();
+          telacaduser.setLocationRelativeTo(null); // Centralize a tela
+          telacaduser.setVisible(true);
+          dispose(); // Feche a tela de login
     }//GEN-LAST:event_btnConsulta3ActionPerformed
 
     private void btnEstoqueActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEstoqueActionPerformed
-        // TODO add your handling code here:
+               TelaAlterTigela telaCadProd = new TelaAlterTigela();
+               telaCadProd.setLocationRelativeTo(null); // Centralize a tela
+               telaCadProd.setVisible(true);
+               dispose();
     }//GEN-LAST:event_btnEstoqueActionPerformed
 
     private void btnVenda1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVenda1ActionPerformed

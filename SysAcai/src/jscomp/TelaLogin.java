@@ -103,7 +103,7 @@ public class TelaLogin extends javax.swing.JFrame {
         jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setTitle("LOGIN -SYSACAI");
+        setTitle("LOGIN -SYSAÇAI");
 
         jPanel1.setBackground(new java.awt.Color(153, 51, 255));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());

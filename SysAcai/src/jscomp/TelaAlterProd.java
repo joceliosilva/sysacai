@@ -230,7 +230,7 @@ public class TelaAlterProd extends javax.swing.JFrame {
         txtNome.setBorder(javax.swing.BorderFactory.createTitledBorder("NOME"));
 
         cmbProdutos.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        cmbProdutos.setBorder(javax.swing.BorderFactory.createTitledBorder("SELECIONE O PORDUTO"));
+        cmbProdutos.setBorder(javax.swing.BorderFactory.createTitledBorder("SELECIONE O PRODUTO"));
 
         txtPreco.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         txtPreco.setToolTipText("Digite o preço...");

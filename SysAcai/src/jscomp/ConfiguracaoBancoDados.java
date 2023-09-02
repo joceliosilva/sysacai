@@ -31,11 +31,14 @@ public class ConfiguracaoBancoDados extends JFrame {
 
         painel.add(new JLabel("Porta:"));
         txtPorta = new JTextField();
+        txtPorta.setText("3306");
         painel.add(txtPorta);
 
         painel.add(new JLabel("Nome do Banco de Dados:"));
         txtNomeBanco = new JTextField();
+        txtNomeBanco.setText("sysacai");
         painel.add(txtNomeBanco);
+        
 
         painel.add(new JLabel("Nome de Usuário:"));
         txtUsuario = new JTextField();

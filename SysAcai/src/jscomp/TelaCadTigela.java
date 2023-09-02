@@ -44,6 +44,7 @@ public class TelaCadTigela extends javax.swing.JFrame {
      
     private void cadastrarTigela() {
         try {
+            
             // Estabeleça a conexão com o banco de dados (substitua com suas próprias configurações)
             Connection conn = DriverManager.getConnection(urlBanco, usuario, senha);
 
@@ -145,7 +146,7 @@ public class TelaCadTigela extends javax.swing.JFrame {
 
         txtTaraTigela.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         txtTaraTigela.setToolTipText("Digite o preço...");
-        txtTaraTigela.setBorder(javax.swing.BorderFactory.createTitledBorder("TARA"));
+        txtTaraTigela.setBorder(javax.swing.BorderFactory.createTitledBorder("TARA (EM KG)"));
 
         jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));

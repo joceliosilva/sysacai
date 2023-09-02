@@ -66,7 +66,7 @@ public class TelaAlterProd extends javax.swing.JFrame {
 
         // Limpe o ComboBox antes de adicionar os novos itens
         cmbProdutos.removeAllItems();
-
+         cmbProdutos.addItem("Selecione...");
         // Preencha o ComboBox com os nomes dos produtos
         while (rs.next()) {
             String nomeProduto = rs.getString("nome");

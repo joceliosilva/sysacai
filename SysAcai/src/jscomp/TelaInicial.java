@@ -357,10 +357,10 @@ public class TelaInicial extends javax.swing.JFrame {
     }//GEN-LAST:event_btnConsulta8ActionPerformed
 
     private void btnConsulta9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConsulta9ActionPerformed
-        //TelaAlterarLogo logo = new TelaAlterarLogo();
-       // logo.setVisible(true);
-        //logo.setLocationRelativeTo(null);
-        //dispose();
+       TelaAlterarLogo logo = new TelaAlterarLogo();
+       logo.setVisible(true);
+       logo.setLocationRelativeTo(null);
+       dispose();
     }//GEN-LAST:event_btnConsulta9ActionPerformed
 
     /**

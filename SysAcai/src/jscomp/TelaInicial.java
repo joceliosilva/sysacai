@@ -328,7 +328,10 @@ public class TelaInicial extends javax.swing.JFrame {
     }//GEN-LAST:event_btnEstoqueActionPerformed
 
     private void btnVenda1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVenda1ActionPerformed
-        // TODO add your handling code here:
+       TelaRelatorioVendas rl = new TelaRelatorioVendas();
+       rl.setLocationRelativeTo(null);
+       rl.setVisible(true);
+       dispose();
     }//GEN-LAST:event_btnVenda1ActionPerformed
 
     private void btnConsulta5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConsulta5ActionPerformed
